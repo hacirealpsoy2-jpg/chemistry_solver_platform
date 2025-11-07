@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kayıt Ol - Kimya Çözüm Rehberi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="card">
+        <h1>📝 Kayıt Ol</h1>
+        <form id="registerForm">
+            <label for="username">Kullanıcı Adı:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Şifre:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+        <p>Zaten bir hesabın var mı? <a href="/login.html">Giriş Yap</a></p>
+        <div id="message" style="margin-top: 1rem; color: red;"></div>
+    </main>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = e.target.username.value;
+            const password = e.target.password.value;
+            const messageDiv = document.getElementById("message");
+
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                messageDiv.style.color = "green";
+                messageDiv.textContent = "Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...";
+                setTimeout(() => {
+                    window.location.href = "/login.html";
+                }, 2000);
+            } else {
+                messageDiv.style.color = "red";
+                messageDiv.textContent = data.message || "Bir hata oluştu.";
+            }
+        });
+    </script>
+</body>
+</html>

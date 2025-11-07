@@ -1,0 +1,1 @@
+{"name":"chemistry-solver","version":"1.0.0","description":"Kimya Çözüm Rehberi (Gemini 2.5 Flash destekli)","main":"server.js","type":"module","scripts":{"start":"node server.js"},"dependencies":{"bcrypt":"^6.0.0","body-parser":"^1.20.2","cookie-parser":"^1.4.7","dotenv":"^16.3.1","express":"^4.19.2","express-session":"^1.18.2","fs-extra":"^11.1.1","node-fetch":"^3.3.2"}}

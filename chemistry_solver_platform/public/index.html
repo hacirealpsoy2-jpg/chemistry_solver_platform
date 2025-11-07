@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Kimya Çözüm Rehberi</title>
+<link rel="stylesheet" href="style.css">
+<script src="nav.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<main class="card">
+<h1>🧪 Kimya Çözüm Rehberi</h1>
+<p>Kimya sorusunu yazın veya resmini yükleyin. Adım adım çözümü görün.</p>
+
+<textarea id="textInput" placeholder="Sorunuzu yazın..." rows="4"></textarea><br>
+<input type="file" id="imageInput" accept="image/*"><br><br>
+
+<button id="solveBtn">Çözümü Göster</button>
+
+<div id="loading" style="display:none;">⏳ Çözüm hazırlanıyor...</div>
+
+<section id="result" style="display:none;">
+<h2>Çözüm</h2>
+<p><b>Konu:</b> <span id="konu"></span></p>
+<p><b>İstenilen:</b> <span id="istenilen"></span></p>
+<p><b>Verilenler:</b> <span id="verilenler"></span></p>
+<p><b>Çözüm:</b> <span id="cozum"></span></p>
+<p><b>Sonuç:</b> <span id="sonuc"></span></p>
+<hr>
+<h3>Konu Özeti</h3>
+<p id="konuOzet"></p>
+</section>
+</main>
+</body>
+</html>

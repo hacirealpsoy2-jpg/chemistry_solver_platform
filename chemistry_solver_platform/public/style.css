@@ -1,0 +1,19 @@
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(135deg, #e0f2fe, #ede9fe);
+color: #1e293b;
+margin: 0;
+padding: 0;
+}
+button {
+transition: all 0.3s ease;
+}
+button:hover {
+transform: translateY(-2px);
+}
+.card {
+background: white;
+border-radius: 1rem;
+padding: 1rem 1.5rem;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

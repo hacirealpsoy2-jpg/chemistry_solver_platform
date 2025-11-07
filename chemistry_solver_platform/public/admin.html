@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Admin Paneli</title>
+<link rel="stylesheet" href="style.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+<main class="card">
+<h1>👑 Admin Paneli</h1>
+<button onclick="loadUsers()">Kullanıcıları Yenile</button>
+<ul id="userList"></ul>
+</main>
+
+<script>
+async function loadUsers() {
+const res = await fetch("/api/users");
+const users = await res.json();
+const list = document.getElementById("userList");
+list.innerHTML = "";
+users.forEach(u => {
+const li = document.createElement("li");
+li.textContent = u.username + (u.blocked ? " (Engelli)" : "");
+const del = document.createElement("button");
+del.textContent = "Sil";
+del.onclick = () => deleteUser(u.username);
+const block = document.createElement("button");
+block.textContent = u.blocked ? "Engeli Kaldır" : "Engelle";
+block.onclick = () => blockUser(u.username, !u.blocked);
+li.append(" ", del, " ", block);
+list.appendChild(li);
+});
+}
+
+async function deleteUser(username) {
+await fetch(`/api/users/${username}`, { method: "DELETE" });
+loadUsers();
+}
+async function blockUser(username, blocked) {
+await fetch(`/api/users/block`, {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ username, blocked })
+});
+loadUsers();
+}
+
+loadUsers();
+</script>
+</body>
+</html>

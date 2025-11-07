@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Giriş Yap - Kimya Çözüm Rehberi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="card">
+        <h1>🔑 Giriş Yap</h1>
+        <form id="loginForm">
+            <label for="username">Kullanıcı Adı:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Şifre:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Giriş Yap</button>
+        </form>
+        <p>Hesabın yok mu? <a href="/register.html">Kayıt Ol</a></p>
+        <div id="message" style="margin-top: 1rem; color: red;"></div>
+    </main>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = e.target.username.value;
+            const password = e.target.password.value;
+            const messageDiv = document.getElementById("message");
+
+            const res = await fetch("/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                if (data.role === 'admin') {
+                    window.location.href = "/admin.html";
+                } else {
+                    window.location.href = "/index.html";
+                }
+            } else {
+                messageDiv.textContent = data.message || "Giriş başarısız.";
+            }
+        });
+    </script>
+</body>
+</html>
